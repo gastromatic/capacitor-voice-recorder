@@ -49,6 +49,7 @@
     "docgen": "docgen --api VoiceRecorderPlugin --output-readme README.md --output-json dist/docs.json",
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
     "clean": "rimraf ./dist",
+    "postinstall": "npm run build",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build"
   },
