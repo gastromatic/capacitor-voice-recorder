@@ -47,7 +47,7 @@
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
     "build": "npm run clean && tsc && rollup -c rollup.config.mjs",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf './dist'",
     "postinstall": "npm run build",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build"
