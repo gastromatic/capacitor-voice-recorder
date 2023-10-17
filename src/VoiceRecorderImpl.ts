@@ -66,20 +66,15 @@ export class VoiceRecorderImpl {
     }
 
     public static async hasAudioRecordingPermission(): Promise<GenericResponse> {
-        // Safari does not support navigator.permissions.query
-        if (!navigator.permissions.query) {
-            if (navigator.mediaDevices !== undefined) {
+        return navigator.permissions.query({name: 'microphone' as any})
+            .then(result => ({value: result.state === 'granted'}))
+            .catch(() => {
+                // Safari and firefox does not support navigator.permissions.query
                 return navigator.mediaDevices.getUserMedia({audio: true})
                     .then(() => successResponse())
                     .catch(() => {
                         throw couldNotQueryPermissionStatusError()
                     });
-            }
-        }
-        return navigator.permissions.query({name: 'microphone' as any})
-            .then(result => ({value: result.state === 'granted'}))
-            .catch(() => {
-                throw couldNotQueryPermissionStatusError();
             });
     }
 
